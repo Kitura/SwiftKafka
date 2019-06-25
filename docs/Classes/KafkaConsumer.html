@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>KafkaConsumer Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/KafkaConsumer" class="dashAnchor"></a>
+    <a title="KafkaConsumer Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        KafkaConsumer Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaClient.html">KafkaClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig.html">KafkaConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/DebugOptions.html">– DebugOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/IPAddressFamily.html">– IPAddressFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/SecurityProtocol.html">– SecurityProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/SASLMechanism.html">– SASLMechanism</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/AutoResetOptions.html">– AutoResetOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConsumer.html">KafkaConsumer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaProducer.html">KafkaProducer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/KafkaConsumerRecord.html">KafkaConsumerRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KafkaError.html">KafkaError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KafkaProducerRecord.html">KafkaProducerRecord</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>KafkaConsumer</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">KafkaConsumer</span><span class="p">:</span> <span class="kt"><a href="../Classes/KafkaClient.html">KafkaClient</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A <code><a href="../Classes/KafkaClient.html">KafkaClient</a></code> for consuming messages on a topic from a broker. </p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
+<pre class="highlight swift"><code><span class="k">do</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">config</span> <span class="o">=</span> <span class="kt">KafkaConfig</span><span class="p">()</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">groupId</span> <span class="o">=</span> <span class="s">"Kitura"</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">autoOffsetReset</span> <span class="o">=</span> <span class="o">.</span><span class="n">beginning</span>
+    <span class="k">let</span> <span class="nv">consumer</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">KafkaConsumer</span><span class="p">(</span><span class="nv">config</span><span class="p">:</span> <span class="n">config</span><span class="p">)</span>
+    <span class="n">consumer</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nv">brokers</span><span class="p">:</span> <span class="s">"localhost:9092"</span><span class="p">)</span>
+    <span class="k">try</span> <span class="n">consumer</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">topics</span><span class="p">:</span> <span class="p">[</span><span class="s">"test"</span><span class="p">])</span>
+    <span class="k">let</span> <span class="nv">records</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="nf">poll</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">records</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Error creating consumer: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B8ConsumerC6configAcA0B6ConfigC_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(config:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B8ConsumerC6configAcA0B6ConfigC_tKcfc">init(config:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new <code>KafkaConsumer</code>.
+If a groupID is not provided in the config, a random UUID will be used.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    A <code><a href="../Structs/KafkaError.html">KafkaError</a></code> if the provided <code><a href="../Classes/KafkaConfig.html">KafkaConfig</a></code> is invalid.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">config</span><span class="p">:</span> <span class="kt"><a href="../Classes/KafkaConfig.html">KafkaConfig</a></span> <span class="o">=</span> <span class="kt"><a href="../Classes/KafkaConfig.html">KafkaConfig</a></span><span class="p">())</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>config</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/KafkaConfig.html">KafkaConfig</a></code> that will configure your Kafka consumer.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B8ConsumerC9subscribe6topicsySaySSG_tKF"></a>
+                    <a name="//apple_ref/swift/Method/subscribe(topics:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B8ConsumerC9subscribe6topicsySaySSG_tKF">subscribe(topics:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Subscribe to one or more topics. The consumer will be assigned partitions based on its consumer group.
+ The subscribe() method is asynchronouswhich and will returns immediately. Background threads will (re)join the group, wait for group rebalance, issue any registered rebalance_cb, assign() the assigned partitions, and then start fetching messages. This cycle may take up to session.timeout.ms * 2 or more to complete.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    A <code><a href="../Structs/KafkaError.html">KafkaError</a></code> if the consumer fails to subscribe the the topic.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">subscribe</span><span class="p">(</span><span class="nv">topics</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>topics</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of Kafka topics to subscribe to.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B8ConsumerC6assign5topic9partition6offsetySS_S2itKF"></a>
+                    <a name="//apple_ref/swift/Method/assign(topic:partition:offset:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B8ConsumerC6assign5topic9partition6offsetySS_S2itKF">assign(topic:partition:offset:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Assign this consumer to a single topic with a specified partition to consume from. 
+The offset to begin consuming from can also be specified, otherwise the consumer default to the end of the current messages.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    A <code><a href="../Structs/KafkaError.html">KafkaError</a></code> if the consumer fails to subscribe the the topic.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">assign</span><span class="p">(</span><span class="nv">topic</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">partition</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="kt">RD_KAFKA_OFFSET_END</span><span class="p">))</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>topic</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Kafka topic to subscribe to.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>partition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The topic partition to consume from.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>offset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The topic offset to begin consuming from. Defaults to -1 representing the end of current messages.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B8ConsumerC4poll7timeoutSayAA0bC6RecordVGSd_tKF"></a>
+                    <a name="//apple_ref/swift/Method/poll(timeout:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B8ConsumerC4poll7timeoutSayAA0bC6RecordVGSd_tKF">poll(timeout:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consume messages from the topic you are subscribed to.
+The messages will be consumed from your last call to poll.
+This function will block for at most timeout seconds.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">poll</span><span class="p">(</span><span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/KafkaConsumerRecord.html">KafkaConsumerRecord</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum <code>TimeInterval</code> in seconds that this call will block for while consuming messages.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An array of <code><a href="../Structs/KafkaConsumerRecord.html">KafkaConsumerRecord</a></code> that have been consumed.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B8ConsumerC10commitSyncyyKF"></a>
+                    <a name="//apple_ref/swift/Method/commitSync()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B8ConsumerC10commitSyncyyKF">commitSync()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Commit the offsets for the current partition assignment on the broker.<br>
+This marks the records since the last poll as processed so they will not be reassigned during a rebalance.
+If you are using <code>commitSync()</code>, <code>enableAutoCommit</code> on <code><a href="../Classes/KafkaConfig.html">KafkaConfig</a></code> should be set to false.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">commitSync</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B8ConsumerC5closeyyKF"></a>
+                    <a name="//apple_ref/swift/Method/close()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B8ConsumerC5closeyyKF">close()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Close down the <code>KafkaConsumer</code>.
+This call will block until the consumer has revoked its assignment.
+The maximum blocking time is roughly limited to session.timeout.ms.
+If you don&rsquo;t call this function, the consumer will be closed when it is deinitialized.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">close</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-06-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>KafkaConfig Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/KafkaConfig" class="dashAnchor"></a>
+    <a title="KafkaConfig Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        KafkaConfig Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaClient.html">KafkaClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig.html">KafkaConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/DebugOptions.html">– DebugOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/IPAddressFamily.html">– IPAddressFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/SecurityProtocol.html">– SecurityProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/SASLMechanism.html">– SASLMechanism</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConfig/AutoResetOptions.html">– AutoResetOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaConsumer.html">KafkaConsumer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KafkaProducer.html">KafkaProducer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/KafkaConsumerRecord.html">KafkaConsumerRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KafkaError.html">KafkaError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KafkaProducerRecord.html">KafkaProducerRecord</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>KafkaConfig</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">KafkaConfig</span></code></pre>
+
+                </div>
+              </div>
+            <p>The configuration settings for a Kafka consumer/producer.
+These can be set either using the helper functions provided or 
+by subscripting <code>KafkaConfig</code> with the configuration key.<br>
+<a href="https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md">Link to configuration keys and descriptions.</a></p>
+<h3 id='usage-example' class='heading'>Usage Example:</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">config</span> <span class="o">=</span> <span class="kt">KafkaConfig</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">groupId</span> <span class="o">=</span> <span class="s">"Kitura"</span>
+<span class="k">let</span> <span class="nv">producer</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">KafkaConsumer</span><span class="p">(</span><span class="nv">config</span><span class="p">:</span> <span class="n">config</span><span class="p">)</span>
+</code></pre>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC10dictionarySDyS2SGvp"></a>
+                    <a name="//apple_ref/swift/Property/dictionary" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC10dictionarySDyS2SGvp">dictionary</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The internal representation of the Kafka configuration.<br>
+Values can be set by subscripting <code>KafkaConfig</code> directly.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">internal(set)</span> <span class="k">var</span> <span class="nv">dictionary</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a KafkaConfig instance with default settings.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigCySSSgSScip"></a>
+                    <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigCySSSgSScip">subscript(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Directly set the configuration settings for librdKafka.<br>
+<a href="https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md">Link to configuration keys and descriptions.</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Global%20Configurations"></a>
+                <a name="//apple_ref/swift/Section/Global Configurations" class="dashAnchor"></a>
+                <a href="#/Global%20Configurations">
+                  <h3 class="section-name">Global Configurations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC8clientIDSSvp"></a>
+                    <a name="//apple_ref/swift/Property/clientID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC8clientIDSSvp">clientID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Client identifier. Defaults to <q>rdkafka</q>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">clientID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC15messageMaxBytesSivp"></a>
+                    <a name="//apple_ref/swift/Property/messageMaxBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC15messageMaxBytesSivp">messageMaxBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Maximum Kafka protocol request message size. Defaults to 1000000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">messageMaxBytes</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC19messageCopyMaxBytesSivp"></a>
+                    <a name="//apple_ref/swift/Property/messageCopyMaxBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC19messageCopyMaxBytesSivp">messageCopyMaxBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Maximum size for message to be copied to buffer. Messages larger than this will be passed by reference (zero-copy) at the expense of larger iovecs. Defaults to 65535.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">messageCopyMaxBytes</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC22receiveMessageMaxBytesSivp"></a>
+                    <a name="//apple_ref/swift/Property/receiveMessageMaxBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC22receiveMessageMaxBytesSivp">receiveMessageMaxBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Maximum Kafka protocol response message size. This serves as a safety precaution to avoid memory exhaustion in case of protocol hickups. This value must be at least fetchMaxBytes + 512 to allow for protocol overhead; the value is adjusted automatically unless the configuration property is explicitly set. Defaults to 100000000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">receiveMessageMaxBytes</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC32maxInFlightRequestsPerConnectionSivp"></a>
+                    <a name="//apple_ref/swift/Property/maxInFlightRequestsPerConnection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC32maxInFlightRequestsPerConnectionSivp">maxInFlightRequestsPerConnection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Maximum number of in-flight requests per broker connection. This is a generic property applied to all broker communication, however it is primarily relevant to produce requests. In particular, note that other mechanisms limit the number of outstanding consumer fetch request per broker to one. Defaults to 1000000</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">maxInFlightRequestsPerConnection</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC24metadataRequestTimeoutMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/metadataRequestTimeoutMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC24metadataRequestTimeoutMsSivp">metadataRequestTimeoutMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Non-topic request timeout in milliseconds. This is for metadata requests, etc. Defaults to 60000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">metadataRequestTimeoutMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC30topicMetadataRefreshIntervalMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/topicMetadataRefreshIntervalMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC30topicMetadataRefreshIntervalMsSivp">topicMetadataRefreshIntervalMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Topic metadata refresh interval in milliseconds. The metadata is automatically refreshed on error and connect. Use -1 to disable the intervalled refresh. Defaults to 300000</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">topicMetadataRefreshIntervalMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16metadataMaxAgeMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/metadataMaxAgeMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16metadataMaxAgeMsSivp">metadataMaxAgeMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Metadata cache max age. Defaults to topic.metadata.refresh.interval.ms * 3</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">metadataMaxAgeMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC34topicMetadataRefreshFastIntervalMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/topicMetadataRefreshFastIntervalMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC34topicMetadataRefreshFastIntervalMsSivp">topicMetadataRefreshFastIntervalMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When a topic loses its leader a new metadata request will be enqueued with this initial interval, exponentially increasing until the topic metadata has been refreshed. This is used to recover quickly from transitioning leader brokers. Defaults to 250.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">topicMetadataRefreshFastIntervalMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC26topicMetadataRefreshSparseSbvp"></a>
+                    <a name="//apple_ref/swift/Property/topicMetadataRefreshSparse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC26topicMetadataRefreshSparseSbvp">topicMetadataRefreshSparse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sparse metadata requests (consumes less network bandwidth). Defaults to true.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">topicMetadataRefreshSparse</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC5debugSayAC12DebugOptionsVGvp"></a>
+                    <a name="//apple_ref/swift/Property/debug" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC5debugSayAC12DebugOptionsVGvp">debug</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of debug contexts to enable. Defaults to an empty array.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debug</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/KafkaConfig/DebugOptions.html">DebugOptions</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC12DebugOptionsV"></a>
+                    <a name="//apple_ref/swift/Struct/DebugOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC12DebugOptionsV">DebugOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The possible debug options that can be enabled.</p>
+
+                        <a href="../Classes/KafkaConfig/DebugOptions.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DebugOptions</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC15socketTimeoutMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/socketTimeoutMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC15socketTimeoutMsSivp">socketTimeoutMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default timeout for network requests.<br>
+Producer: ProduceRequests will use the lesser value of socket.timeout.ms and remaining message.timeout.ms for the first message in the batch.<br>
+Consumer: FetchRequests will use fetch.wait.max.ms + socket.timeout.ms. Admin: Admin requests will use socket.timeout.ms<br>
+Defaults to 60000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">socketTimeoutMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC21socketSendBufferBytesSivp"></a>
+                    <a name="//apple_ref/swift/Property/socketSendBufferBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC21socketSendBufferBytesSivp">socketSendBufferBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Broker socket send buffer size. System default is used if 0. Defaults to 0.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">socketSendBufferBytes</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC24socketReceiveBufferBytesSivp"></a>
+                    <a name="//apple_ref/swift/Property/socketReceiveBufferBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC24socketReceiveBufferBytesSivp">socketReceiveBufferBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Broker socket receive buffer size. System default is used if 0.  Defaults to 0.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">socketReceiveBufferBytes</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC21socketKeepaliveEnableSbvp"></a>
+                    <a name="//apple_ref/swift/Property/socketKeepaliveEnable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC21socketKeepaliveEnableSbvp">socketKeepaliveEnable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enable TCP keep-alives (SO_KEEPALIVE) on broker sockets. Defaults to false</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">socketKeepaliveEnable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC18socketNagleDisableSbvp"></a>
+                    <a name="//apple_ref/swift/Property/socketNagleDisable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC18socketNagleDisableSbvp">socketNagleDisable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Disable the Nagle algorithm (TCP_NODELAY) on broker sockets.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">socketNagleDisable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC14socketMaxFailsSivp"></a>
+                    <a name="//apple_ref/swift/Property/socketMaxFails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC14socketMaxFailsSivp">socketMaxFails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Disconnect from broker when this number of send failures (e.g., timed out requests) is reached. Disable with 0. WARNING: It is highly recommended to leave this setting at its default value of 1 to avoid the client and broker to become desynchronized in case of request timeouts. NOTE: The connection is automatically re-established.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">socketMaxFails</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC19brokerAddressFamilyAC09IPAddressF0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/brokerAddressFamily" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC19brokerAddressFamilyAC09IPAddressF0Vvp">brokerAddressFamily</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allowed broker <code><a href="../Classes/KafkaConfig/IPAddressFamily.html">IPAddressFamily</a></code> (any, IPv4, IPv6). Defaults to <q>any</q>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">brokerAddressFamily</span><span class="p">:</span> <span class="kt"><a href="../Classes/KafkaConfig/IPAddressFamily.html">IPAddressFamily</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC15IPAddressFamilyV"></a>
+                    <a name="//apple_ref/swift/Struct/IPAddressFamily" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC15IPAddressFamilyV">IPAddressFamily</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The possible IP address family options that can be set.</p>
+
+                        <a href="../Classes/KafkaConfig/IPAddressFamily.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">IPAddressFamily</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC18reconnectBackoffMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/reconnectBackoffMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC18reconnectBackoffMsSivp">reconnectBackoffMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The initial time to wait before reconnecting to a broker after the connection has been closed. The time is increased exponentially until reconnect.backoff.max.ms is reached. -25% to +50% jitter is applied to each reconnect backoff. A value of 0 disables the backoff and reconnects immediately. Defaults to 100.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">reconnectBackoffMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC21reconnectBackoffMaxMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/reconnectBackoffMaxMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC21reconnectBackoffMaxMsSivp">reconnectBackoffMaxMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The maximum time to wait before reconnecting to a broker after the connection has been closed. Defaults to 10000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">reconnectBackoffMaxMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16securityProtocolAC08SecurityE0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/securityProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16securityProtocolAC08SecurityE0Vvp">securityProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code><a href="../Classes/KafkaConfig/SecurityProtocol.html">SecurityProtocol</a></code> used to communicate with brokers.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">securityProtocol</span><span class="p">:</span> <span class="kt"><a href="../Classes/KafkaConfig/SecurityProtocol.html">SecurityProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16SecurityProtocolV"></a>
+                    <a name="//apple_ref/swift/Struct/SecurityProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16SecurityProtocolV">SecurityProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The possible security protocols that can be used to communicate with brokers.</p>
+
+                        <a href="../Classes/KafkaConfig/SecurityProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SecurityProtocol</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC14sslKeyLocationSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sslKeyLocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC14sslKeyLocationSSSgvp">sslKeyLocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Path to client&rsquo;s private key (PEM) used for authentication. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sslKeyLocation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC14sslKeyPasswordSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sslKeyPassword" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC14sslKeyPasswordSSSgvp">sslKeyPassword</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Private key passphrase. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sslKeyPassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC22sslCertificateLocationSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sslCertificateLocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC22sslCertificateLocationSSSgvp">sslCertificateLocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Path to client&rsquo;s public key (PEM) used for authentication. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sslCertificateLocation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC13sslCaLocationSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sslCaLocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC13sslCaLocationSSSgvp">sslCaLocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>File or directory path to CA certificate(s) for verifying the broker&rsquo;s key. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sslCaLocation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC14sslCrlLocationSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sslCrlLocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC14sslCrlLocationSSSgvp">sslCrlLocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Path to CRL for verifying broker&rsquo;s certificate validity. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sslCrlLocation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC19sslKeystoreLocationSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sslKeystoreLocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC19sslKeystoreLocationSSSgvp">sslKeystoreLocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Path to client&rsquo;s keystore (PKCS#12) used for authentication. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sslKeystoreLocation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC19sslKeystorePasswordSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sslKeystorePassword" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC19sslKeystorePasswordSSSgvp">sslKeystorePassword</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Client&rsquo;s keystore (PKCS#12) password. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sslKeystorePassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC13saslMechanismAC13SASLMechanismVvp"></a>
+                    <a name="//apple_ref/swift/Property/saslMechanism" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC13saslMechanismAC13SASLMechanismVvp">saslMechanism</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SASL mechanism to use for authentication. Defaults to GSSAPI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">saslMechanism</span><span class="p">:</span> <span class="kt"><a href="../Classes/KafkaConfig/SASLMechanism.html">SASLMechanism</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC13SASLMechanismV"></a>
+                    <a name="//apple_ref/swift/Struct/SASLMechanism" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC13SASLMechanismV">SASLMechanism</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The possible SASL mechanisms that can be used for authentication.</p>
+
+                        <a href="../Classes/KafkaConfig/SASLMechanism.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SASLMechanism</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC12saslUsernameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/saslUsername" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC12saslUsernameSSSgvp">saslUsername</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SASL username for use with the PLAIN, SCRAM-SHA-256 and SCRAM-SHA-512 mechanisms. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">saslUsername</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC12saslPasswordSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/saslPassword" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC12saslPasswordSSSgvp">saslPassword</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SASL password for use with the PLAIN, SCRAM-SHA-256 and SCRAM-SHA-512 mechanisms. Defaults to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">saslPassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Consumer%20Configurations"></a>
+                <a name="//apple_ref/swift/Section/Consumer Configurations" class="dashAnchor"></a>
+                <a href="#/Consumer%20Configurations">
+                  <h3 class="section-name">Consumer Configurations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC7groupIdSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/groupId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC7groupIdSSSgvp">groupId</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. Client group id string. All clients sharing the same group.id belong to the same group and the messages will be split between them. Defaults to nil, meaning a random UUID String will be used as the groupId.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">groupId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16sessionTimeoutMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/sessionTimeoutMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16sessionTimeoutMsSivp">sessionTimeoutMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. Client group session and failure detection timeout. The consumer sends periodic heartbeats (heartbeat.interval.ms) to indicate its liveness to the broker. If no hearts are received by the broker for a group member within the session timeout, the broker will remove the consumer from the group and trigger a rebalance. Defaults to 10000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sessionTimeoutMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC19heartbeatIntervalMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/heartbeatIntervalMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC19heartbeatIntervalMsSivp">heartbeatIntervalMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. Group session keepalive heartbeat interval. Defaults to 3000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">heartbeatIntervalMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC17maxPollIntervalMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/maxPollIntervalMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC17maxPollIntervalMsSivp">maxPollIntervalMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. Maximum allowed time between calls to consume messages (e.g., rd_kafka_consumer_poll()) for high-level consumers. If this interval is exceeded the consumer is considered failed and the group will rebalance in order to reassign the partitions to another consumer group member. Warning: Offset commits may be not possible at this point. Note: It is recommended to set enable.auto.offset.store=false for long-time processing applications and then explicitly store offsets (using offsets_store()) after message processing, to make sure offsets are not auto-committed prior to processing has finished. The interval is checked two times per second. Defaults to 300000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">maxPollIntervalMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16enableAutoCommitSbvp"></a>
+                    <a name="//apple_ref/swift/Property/enableAutoCommit" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16enableAutoCommitSbvp">enableAutoCommit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. Automatically and periodically commit offsets in the background. Note: setting this to false does not prevent the consumer from fetching previously committed start offsets. To circumvent this behaviour set specific start offsets per partition in the call to assign(). Defaults to true.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enableAutoCommit</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC20autoCommitIntervalMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/autoCommitIntervalMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC20autoCommitIntervalMsSivp">autoCommitIntervalMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. The frequency in milliseconds that the consumer offsets are committed (written) to offset storage. (0 = disable). Default to 5000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">autoCommitIntervalMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC21enableAutoOffsetStoreSbvp"></a>
+                    <a name="//apple_ref/swift/Property/enableAutoOffsetStore" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC21enableAutoOffsetStoreSbvp">enableAutoOffsetStore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. Automatically store offset of last message provided to application. The offset store is an in-memory store of the next offset to (auto-)commit for each partition. Defaults to true</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enableAutoOffsetStore</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC18enablePartitionEOFSbvp"></a>
+                    <a name="//apple_ref/swift/Property/enablePartitionEOF" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC18enablePartitionEOFSbvp">enablePartitionEOF</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer Only. Emit RD_KAFKA_RESP_ERR__PARTITION_EOF event whenever the consumer reaches the end of a partition. defaults to true.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enablePartitionEOF</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Producer%20Configurations"></a>
+                <a name="//apple_ref/swift/Section/Producer Configurations" class="dashAnchor"></a>
+                <a href="#/Producer%20Configurations">
+                  <h3 class="section-name">Producer Configurations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC17enableIdempotenceSbvp"></a>
+                    <a name="//apple_ref/swift/Property/enableIdempotence" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC17enableIdempotenceSbvp">enableIdempotence</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. When set to true, the producer will ensure that messages are successfully produced exactly once and in the original produce order. The following configuration properties are adjusted automatically (if not modified by the user) when idempotence is enabled: max.in.flight.requests.per.connection=5 (must be less than or equal to 5), retries=INT32_MAX (must be greater than 0), acks=all, queuing.strategy=fifo. Producer instantation will fail if user-supplied configuration is incompatible. Defaults to false.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enableIdempotence</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC25queueBufferingMaxMessagesSivp"></a>
+                    <a name="//apple_ref/swift/Property/queueBufferingMaxMessages" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC25queueBufferingMaxMessagesSivp">queueBufferingMaxMessages</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. Maximum number of messages allowed on the producer queue. This queue is shared by all topics and partitions. Defaults to 100000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">queueBufferingMaxMessages</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC23queueBufferingMaxKBytesSivp"></a>
+                    <a name="//apple_ref/swift/Property/queueBufferingMaxKBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC23queueBufferingMaxKBytesSivp">queueBufferingMaxKBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. Maximum total message size sum allowed on the producer queue. This queue is shared by all topics and partitions. This property has higher priority than queue.buffering.max.messages. Defaults to 1048576.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">queueBufferingMaxKBytes</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC19queueBufferingMaxMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/queueBufferingMaxMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC19queueBufferingMaxMsSivp">queueBufferingMaxMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. Delay in milliseconds to wait for messages in the producer queue to accumulate before constructing message batches (MessageSets) to transmit to brokers. A higher value allows larger and more effective (less overhead, improved compression) batches of messages to accumulate at the expense of increased message delivery latency. Defaults to 0.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">queueBufferingMaxMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC21messageSendMaxRetriesSivp"></a>
+                    <a name="//apple_ref/swift/Property/messageSendMaxRetries" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC21messageSendMaxRetriesSivp">messageSendMaxRetries</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. How many times to retry sending a failing Message. Note: retrying may cause reordering unless enable.idempotence is set to true. Defaults to 2.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">messageSendMaxRetries</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Topic%20Configurations"></a>
+                <a name="//apple_ref/swift/Section/Topic Configurations" class="dashAnchor"></a>
+                <a href="#/Topic%20Configurations">
+                  <h3 class="section-name">Topic Configurations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC19requestRequiredAcksSivp"></a>
+                    <a name="//apple_ref/swift/Property/requestRequiredAcks" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC19requestRequiredAcksSivp">requestRequiredAcks</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. This field indicates the number of acknowledgements the leader broker must receive from ISR brokers before responding to the request: 0=Broker does not send any response/ack to client, -1=Broker will block until message is committed by all in sync replicas (ISRs). Defaults to -1.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">requestRequiredAcks</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16requestTimeoutMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/requestTimeoutMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16requestTimeoutMsSivp">requestTimeoutMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. The ack timeout of the producer request in milliseconds. This value is only enforced by the broker and relies on request.required.acks being != 0. Default 5000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">requestTimeoutMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16messageTimeoutMsSivp"></a>
+                    <a name="//apple_ref/swift/Property/messageTimeoutMs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16messageTimeoutMsSivp">messageTimeoutMs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Producer only. Local message timeout. This value is only enforced locally and limits the time a produced message waits for successful delivery. A time of 0 is infinite. This is the maximum time Kitura-Kafka may use to deliver a message (including retries). Delivery error occurs when either the retry count or the message timeout are exceeded. Defaults to 300000.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">messageTimeoutMs</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC15autoOffsetResetAC04AutoF7OptionsVvp"></a>
+                    <a name="//apple_ref/swift/Property/autoOffsetReset" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC15autoOffsetResetAC04AutoF7OptionsVvp">autoOffsetReset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Consumer only. Action to take when there is no initial offset in offset store or the desired offset is out of range: &lsquo;smallest&rsquo;,&lsquo;earliest&rsquo;, &lsquo;beginning&rsquo; - automatically reset the offset to the smallest offset, &lsquo;largest&rsquo;,&lsquo;latest&rsquo;, &lsquo;end&rsquo; - automatically reset the offset to the largest offset, &lsquo;error&rsquo; - trigger an error which is retrieved by consuming message. Defaults to largest.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">autoOffsetReset</span><span class="p">:</span> <span class="kt"><a href="../Classes/KafkaConfig/AutoResetOptions.html">AutoResetOptions</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftKafka0B6ConfigC16AutoResetOptionsV"></a>
+                    <a name="//apple_ref/swift/Struct/AutoResetOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftKafka0B6ConfigC16AutoResetOptionsV">AutoResetOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A struct representing the options actions to take when there is no initial offset in offset store or the desired offset is out of range.</p>
+
+                        <a href="../Classes/KafkaConfig/AutoResetOptions.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AutoResetOptions</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-06-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

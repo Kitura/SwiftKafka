@@ -1,0 +1,8 @@
+.build
+build
+Packages
+*.pkg
+SwiftKafka.xcodeproj
+*.DS_Store
+.build-ubuntu
+Package.resolved
