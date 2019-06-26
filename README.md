@@ -148,7 +148,7 @@ do {
     }
     try consumer.subscribe(topics: ["test"])
     while(true) {
-        let records = consumer.poll()
+        let records = try consumer.poll()
         print(records)
     }
 } catch {
