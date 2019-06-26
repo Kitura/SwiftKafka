@@ -127,7 +127,9 @@ final class SwiftKafkaTests: XCTestCase {
     func testProduceCallback() {
         do {
             let produceExpectation = expectation(description: "message callback is produced")
-            let producer = try KafkaProducer()
+            let config = KafkaConfig()
+            config.brokerAddressFamily = .v4
+            let producer = try KafkaProducer(config: config)
             let producerBrokersCount = producer.connect(brokers: "localhost:9092")
             XCTAssertGreaterThan(producerBrokersCount, 0)
             producer.send(producerRecord: KafkaProducerRecord(topic: "test4", value: "Hello world", key: "Key")) { result in
