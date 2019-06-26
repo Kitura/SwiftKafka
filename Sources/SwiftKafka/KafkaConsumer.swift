@@ -114,6 +114,7 @@ public class KafkaConsumer: KafkaClient {
             if let msgPointer = rd_kafka_consumer_poll(kafkaHandle, Int32(timeout * 100)) {
                 // err = 0 on success or -191 on no more messages
                 if msgPointer.pointee.err == RD_KAFKA_RESP_ERR__PARTITION_EOF {
+                    // We continue here because there could still be more messages on other partitions/topics to be consumed
                     continue
                 } else if msgPointer.pointee.err.rawValue != 0 {
                     throw KafkaError(rawValue: Int(msgPointer.pointee.err.rawValue))

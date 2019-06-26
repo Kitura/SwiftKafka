@@ -76,7 +76,10 @@ public class KafkaProducer: KafkaClient {
         callbackTimer.cancel()
         // remove this producer from the Dictionary of KafkaHandles to callbacks
         KafkaProducer.callbackSemaphore.wait()
-        KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle] = nil
+        KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle]?.forEach { (key, _) in 
+            key.deallocate()
+            KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle]?[key] = nil
+        }
         KafkaProducer.callbackSemaphore.signal()
     }
     
