@@ -107,12 +107,12 @@ final class SwiftKafkaTests: XCTestCase {
             XCTAssertEqual(brokersCount, 1)
             let producerBrokersCount = producer.connect(brokers: "localhost:9092")
             XCTAssertEqual(producerBrokersCount, 1)
-            try consumer.subscribe(topics: ["test"])
+            try consumer.subscribe(topics: ["test3"])
             sleep(1)
             // Poll to set consumer to end of messages
             let _ = try consumer.poll()
             for i in 0..<10 {
-                producer.send(producerRecord: KafkaProducerRecord(topic: "test", value: "message \(i)"))
+                producer.send(producerRecord: KafkaProducerRecord(topic: "test3", value: "message \(i)"))
             }
             // Give time for produces message to be sent and updated on the kafka service
             sleep(1)
@@ -130,7 +130,7 @@ final class SwiftKafkaTests: XCTestCase {
             let producer = try KafkaProducer()
             let producerBrokersCount = producer.connect(brokers: "localhost:9092")
             XCTAssertGreaterThan(producerBrokersCount, 0)
-            producer.send(producerRecord: KafkaProducerRecord(topic: "test", value: "Hello world", key: "Key")) { result in
+            producer.send(producerRecord: KafkaProducerRecord(topic: "test4", value: "Hello world", key: "Key")) { result in
                 switch result {
                 case .success(_):
                     produceExpectation.fulfill()

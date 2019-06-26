@@ -61,7 +61,10 @@ public class KafkaProducer: KafkaClient {
         try super.init(clientType: .producer, config: config)
         self.timerStart(pollInterval: pollInterval)
         // Create an empty dictionary for this producers messageCallbacks
-        KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle] = [:]
+        KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle]?.forEach { (key, _) in 
+            key.deallocate()
+            KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle]?[key] = nil
+        }
     }
     
     /// :nodoc:

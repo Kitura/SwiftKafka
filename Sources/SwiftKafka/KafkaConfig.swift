@@ -708,6 +708,10 @@ public class KafkaConfig {
                 // No callback set or the KafkaClient is a consumer
                 return
             }
+            // Callback will only be called once so remove idPointer and deallocate it
+            KafkaProducer.kafkaHandleToMessageCallback[kafkaHandle]?[message.pointee._private] = nil
+            message.pointee._private.deallocate()
+            
             // Check if returned message is an error
             if message.pointee.err.rawValue != 0 {
                 let error = KafkaError(rawValue: Int(message.pointee.err.rawValue))
