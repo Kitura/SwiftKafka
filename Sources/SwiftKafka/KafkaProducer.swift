@@ -61,7 +61,9 @@ public class KafkaProducer: KafkaClient {
         try super.init(clientType: .producer, config: config)
         self.timerStart(pollInterval: pollInterval)
         // Create an empty dictionary for this producers messageCallbacks
+        KafkaProducer.callbackSemaphore.wait()
         KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle] = [:]
+        KafkaProducer.callbackSemaphore.signal()
     }
     
     /// :nodoc:
