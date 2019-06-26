@@ -704,14 +704,17 @@ public class KafkaConfig {
                 KafkaProducer.logger.error("Internal error: No message returned in message callback.")
                 return
             }
+            KafkaProducer.callbackSemaphore.wait()
             guard let userCallback = KafkaProducer.kafkaHandleToMessageCallback[kafkaHandle]?[message.pointee._private] else {
+                KafkaProducer.callbackSemaphore.signal()
                 // No callback set or the KafkaClient is a consumer
                 return
             }
             // Callback will only be called once so remove idPointer and deallocate it
             KafkaProducer.kafkaHandleToMessageCallback[kafkaHandle]?[message.pointee._private] = nil
             message.pointee._private.deallocate()
-            
+            KafkaProducer.callbackSemaphore.signal()
+
             // Check if returned message is an error
             if message.pointee.err.rawValue != 0 {
                 let error = KafkaError(rawValue: Int(message.pointee.err.rawValue))
