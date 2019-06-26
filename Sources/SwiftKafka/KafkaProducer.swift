@@ -44,12 +44,18 @@ public class KafkaProducer: KafkaClient {
     let topicSemaphore = DispatchSemaphore(value: 1)
     var topicPointers = [String: OpaquePointer]()
     
-    // You must access callbackPointers through a semaphore for thread safety
-    static let callbackSemaphore = DispatchSemaphore(value: 1)
-    
     // This Dictionary maps the KafkaHandle (OpaquePointer) of a KafkaProducer to a dictionary of idPointers (UnsafeMutableRawPointer) keyed against messageCallbacks ((Result<KafkaConsumerRecord, KafkaError>) -> Void) values.
     // Since C closures cannot capture context, this is used to get the users callback when the call send from the kafka handle returned by rd_kafka_conf_set_dr_msg_cb.
-    static var kafkaHandleToMessageCallback = [OpaquePointer: [UnsafeMutableRawPointer: (Result<KafkaConsumerRecord, KafkaError>) -> Void]]()
+    private static var _kafkaHandleToMessageCallback = [OpaquePointer: [UnsafeMutableRawPointer: (Result<KafkaConsumerRecord, KafkaError>) -> Void]]()
+    private static let _callbackLock = NSLock()
+    internal static var kafkaHandleToMessageCallback: [OpaquePointer: [UnsafeMutableRawPointer: (Result<KafkaConsumerRecord, KafkaError>) -> Void]] {
+        get {
+            return _callbackLock.withLock { _kafkaHandleToMessageCallback }
+        }
+        set {
+            _callbackLock.withLock { _kafkaHandleToMessageCallback = newValue }
+        }
+    }
     let callbackTimer: DispatchSourceTimer
     
     
@@ -75,12 +81,10 @@ public class KafkaProducer: KafkaClient {
         callbackTimer.setEventHandler {}
         callbackTimer.cancel()
         // remove this producer from the Dictionary of KafkaHandles to callbacks
-        KafkaProducer.callbackSemaphore.wait()
         KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle]?.forEach { (key, _) in 
             key.deallocate()
             KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle]?[key] = nil
         }
-        KafkaProducer.callbackSemaphore.signal()
     }
     
     /// Send a `KafkaProducerRecord` to the broker.
@@ -123,10 +127,8 @@ public class KafkaProducer: KafkaClient {
                 callback(.failure(KafkaError(rawValue: Int(responseCode))))
             } 
         }
-        KafkaProducer.callbackSemaphore.wait()
         // Set the message callback for the idPointer for this kafka producer.
         KafkaProducer.kafkaHandleToMessageCallback[self.kafkaHandle]?[idPointer] = messageCallback
-        KafkaProducer.callbackSemaphore.signal()
         rd_kafka_poll(kafkaHandle, 0)
     }
     
