@@ -99,10 +99,11 @@ public class KafkaConsumer: KafkaClient {
     
     /// Consume messages from the topic you are subscribed to.
     /// The messages will be consumed from your last call to poll.
-    /// This function will block for at most timeout seconds.
+    /// This function will block for at most timeout seconds or until `maxRecords` are returned.
+    /// - Parameter maxRecords: The maximum `TimeInterval` in seconds that this call will block for while consuming messages.
     /// - Parameter timeout: The maximum `TimeInterval` in seconds that this call will block for while consuming messages.
     /// - returns: An array of `KafkaConsumerRecord` that have been consumed.
-    public func poll(timeout: TimeInterval = 1) throws -> [KafkaConsumerRecord] {
+    public func poll(maxRecords: Int? = nil, timeout: TimeInterval = 1) throws -> [KafkaConsumerRecord] {
         guard !closed else {
             throw KafkaError(description: "Consumer connection has been closed")
         }
@@ -110,6 +111,11 @@ public class KafkaConsumer: KafkaClient {
         var records = [KafkaConsumerRecord]()
         // Poll Kafka in a loop until either an error is thrown or the timeout is reached. 
         while(Date() < startDate + timeout) {
+            if let maxRecords = maxRecords {
+                if records.count >= maxRecords {
+                    break
+                }
+            }
             // rd_kafka_consumer_poll returns a single kafka record and blocks at most timeout/10 seconds.
             if let msgPointer = rd_kafka_consumer_poll(kafkaHandle, Int32(timeout * 100)) {
                 // err = 0 on success or -191 on no more messages
@@ -121,6 +127,7 @@ public class KafkaConsumer: KafkaClient {
                 } else {
                     if let record = KafkaConsumerRecord(messagePointer: msgPointer) {
                         records.append(record)
+
                     }
                 }
                 rd_kafka_message_destroy(msgPointer)

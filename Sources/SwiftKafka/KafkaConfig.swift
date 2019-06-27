@@ -61,8 +61,6 @@ public class KafkaConfig {
             // Free the config dump
             rd_kafka_conf_dump_free(dictPointer, count)
         }
-        // Set the delivered message callback "dr_msg_cb" to be the Swift callback set when a user initalizes a KafkaProducer.
-        setDeliveredMessageCallback()
     }
 
     /// Directly set the configuration settings for librdKafka.  
@@ -694,7 +692,7 @@ public class KafkaConfig {
     }
     
     /// Convert C closure to Swift closure provided by the user when they initialize a KafkaProducer.
-    private func setDeliveredMessageCallback() {
+    func setDeliveredMessageCallback() {
         // Set the config "dr_msg_cb" for this KafkaConfig pointer.
         // This is a C closure so cannot capture context.
         // Instead you are returned a kafkaHandle to identify the producer this was sent by.

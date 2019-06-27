@@ -52,12 +52,19 @@ public class KafkaProducer: KafkaClient {
     static var kafkaHandleToMessageCallback = [OpaquePointer: [UnsafeMutableRawPointer: (Result<KafkaConsumerRecord, KafkaError>) -> Void]]()
     let callbackTimer: DispatchSourceTimer
     
+	let fireAndForget: Bool
     
     /// Create a new `KafkaProducer` for sending messages to Kafka.
     /// - Parameter config: The `KafkaConfig` that will configure your Kafka producer.
     /// - Parameter pollInterval: The time in seconds that the producer will poll for message callbacks.
-    public init(config: KafkaConfig = KafkaConfig(), pollInterval: TimeInterval = 1) throws {
+    /// - Parameter fireAndForget: If true, send() will return its callback immediately without guarantee that the message was successfully delivered. This improves performance but you will be unable to handle failures. If false, the send() callback will be returned when the result of sending the message is known. 
+	public init(config: KafkaConfig = KafkaConfig(), pollInterval: TimeInterval = 1, fireAndForget: Bool = false) throws {
         self.callbackTimer = DispatchSource.makeTimerSource()
+		if !fireAndForget {
+            // Set the delivered message callback "dr_msg_cb" to be the Swift callback set when a user initalizes a KafkaProducer.
+            config.setDeliveredMessageCallback()
+		}
+        self.fireAndForget = fireAndForget
         try super.init(clientType: .producer, config: config)
         self.timerStart(pollInterval: pollInterval)
         // Create an empty dictionary for this producers messageCallbacks
@@ -88,7 +95,7 @@ public class KafkaProducer: KafkaClient {
     /// Send a `KafkaProducerRecord` to the broker.
     /// The result of sending the message will be returned in the messageCallback.
     /// - Parameter producerRecord: The `KafkaProducerRecord` that will be sent to Kafka.
-    /// - Parameter messageCallback: The callback that will be called with the result of trying to send a message.
+    /// - Parameter messageCallback: The callback that will be called with the result of trying to send a message. If `fireAndForget` is true then this callback will not be called.
     public func send(producerRecord: KafkaProducerRecord, messageCallback: ((Result<KafkaConsumerRecord, KafkaError>) -> Void)? = nil) {
         
         // Get the topic pointer for the KafkaProducerRecord topic or create a new topic if one doesn't exist 
@@ -120,7 +127,7 @@ public class KafkaProducer: KafkaClient {
                                             keyBytes,
                                             keyBytesCount,
                                             idPointer)
-        if responseCode != 0 {
+        if responseCode != 0 && !fireAndForget {
             if let callback = messageCallback {
                 callback(.failure(KafkaError(rawValue: Int(responseCode))))
             } 

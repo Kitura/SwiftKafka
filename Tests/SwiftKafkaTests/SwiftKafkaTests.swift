@@ -53,7 +53,7 @@ final class SwiftKafkaTests: XCTestCase {
             producer.send(producerRecord: KafkaProducerRecord(topic: "test1", value: Data("Hello Kitura".utf8), key: Data("Key".utf8)))
             // Give time for produces message to be sent and updated on the kafka service
             sleep(1)
-            let records = try consumer.poll()
+            let records = try consumer.poll(maxRecords: 2)
             try consumer.close()
             XCTAssertEqual(records.count, 2)
         } catch {
