@@ -13,8 +13,9 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 else
     apt-get update
     apt-get install -y wget
-    apt-get install librdkafka-dev
-    
+    apt-get install -y librdkafka-dev
+    apt install librdkafka-dev
+
     wget https://www-eu.apache.org/dist/kafka/2.2.0/kafka_2.12-2.2.0.tgz -O kafka.tgz
     mkdir -p kafka && tar xzf kafka.tgz -C kafka --strip-components 1
     nohup bash -c "cd kafka && bin/zookeeper-server-start.sh config/zookeeper.properties &"

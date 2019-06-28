@@ -46,16 +46,21 @@ final class SwiftKafkaTests: XCTestCase {
                     return XCTFail("Failed to connect to brokers. Ensure Kafka server is running.")
             }
             try consumer.subscribe(topics: ["test", "test1"])
-            // Give time for consumer to subscribe
-            sleep(1)
+            // Poll to set starting offset at end of messages
             let _ = try consumer.poll()
             producer.send(producerRecord: KafkaProducerRecord(topic: "test", value: "Hello world", key: "Key"))
             producer.send(producerRecord: KafkaProducerRecord(topic: "test1", value: Data("Hello Kitura".utf8), key: Data("Key".utf8)))
             // Give time for produces message to be sent and updated on the kafka service
-            sleep(1)
-            let records = try consumer.poll()
+            var records = [KafkaConsumerRecord]()
+            for _ in 0..<10 {
+                let polledRecords = try consumer.poll()
+                records.append(contentsOf: polledRecords)
+                if records.count >= 2 {
+                    break
+                }
+            }
             try consumer.close()
-            XCTAssertEqual(records.count, 2)
+            XCTAssertGreaterThan(records.count, 1)
         } catch {
             return XCTFail((error as? KafkaError)?.description ?? "")
         }
@@ -86,8 +91,14 @@ final class SwiftKafkaTests: XCTestCase {
             producer.send(producerRecord: KafkaProducerRecord(topic: "test2", value: "Hello Assign", partition: 0, key: "123"))
             producer.send(producerRecord: KafkaProducerRecord(topic: "test2", value: "Hello Assign", partition: 1, key: "123"))
             // Give time for produces message to be sent and updated on the kafka service
-            sleep(1)
-            let records = try consumer.poll()
+            var records = [KafkaConsumerRecord]()
+            for _ in 0..<10 {
+                let polledRecords = try consumer.poll()
+                records.append(contentsOf: polledRecords)
+                if records.count >= 1 {
+                    break
+                }
+            }
             // Consumer should only consume one message from partition 0
             XCTAssertEqual(records.count, 1)
         } catch {
@@ -116,7 +127,14 @@ final class SwiftKafkaTests: XCTestCase {
             }
             // Give time for produces message to be sent and updated on the kafka service
             sleep(1)
-            let records = try consumer.poll()
+            var records = [KafkaConsumerRecord]()
+            for _ in 0..<10 {
+                let polledRecords = try consumer.poll()
+                records.append(contentsOf: polledRecords)
+                if records.count >= 10 {
+                    break
+                }
+            }
             try consumer.commitSync()
             XCTAssertEqual(records.count, 10)
         } catch {
