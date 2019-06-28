@@ -9,7 +9,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew install librdkafka
     zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties
     kafka-server-start /usr/local/etc/kafka/server.properties
-    sleep 10
+    sleep 5
 else
     apt-get update
     apt-get install -y wget librdkafka-dev
@@ -18,5 +18,5 @@ else
     cd kafka_2.12-2.2.0
     bin/zookeeper-server-start.sh config/zookeeper.properties
     bin/kafka-server-start.sh config/server.properties
-    sleep 10
+    sleep 5
 fi
