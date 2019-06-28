@@ -6,11 +6,13 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew update > /dev/null
     brew cask install java
     brew install kafka
+    brew install librdkafka
     zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties
     kafka-server-start /usr/local/etc/kafka/server.properties
     sleep 10
 else
     apt-get install -y wget
+    apt install librdkafka-dev
     wget http://mirror.ox.ac.uk/sites/rsync.apache.org/kafka/2.2.0/kafka_2.12-2.2.0.tgz
     tar -xzf kafka_2.12-2.2.0.tgz
     cd kafka_2.12-2.2.0
