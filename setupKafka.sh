@@ -20,3 +20,6 @@ else
     bin/kafka-server-start.sh config/server.properties
     sleep 10
 fi
+
+git clone https://github.com/IBM-Swift/Package-Builder.git
+./Package-Builder/build-package.sh -projectDir $TRAVIS_BUILD_DIR
