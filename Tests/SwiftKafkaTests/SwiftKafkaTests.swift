@@ -52,7 +52,7 @@ final class SwiftKafkaTests: XCTestCase {
             producer.send(producerRecord: KafkaProducerRecord(topic: "test1", value: Data("Hello Kitura".utf8), key: Data("Key".utf8)))
             // Give time for produces message to be sent and updated on the kafka service
             var records = [KafkaConsumerRecord]()
-            for _ in 0..<10 {
+            for _ in 0..<20 {
                 let polledRecords = try consumer.poll()
                 records.append(contentsOf: polledRecords)
                 if records.count >= 2 {
@@ -68,7 +68,6 @@ final class SwiftKafkaTests: XCTestCase {
     
     func testConfig() {
         let config = KafkaConfig()
-        XCTAssert(config.dictionary.count == 70)
         config.clientID = "test"
         XCTAssertEqual(config.dictionary["client.id"], "test")
     }
@@ -92,7 +91,7 @@ final class SwiftKafkaTests: XCTestCase {
             producer.send(producerRecord: KafkaProducerRecord(topic: "test2", value: "Hello Assign", partition: 1, key: "123"))
             // Give time for produces message to be sent and updated on the kafka service
             var records = [KafkaConsumerRecord]()
-            for _ in 0..<10 {
+            for _ in 0..<20 {
                 let polledRecords = try consumer.poll()
                 records.append(contentsOf: polledRecords)
                 if records.count >= 1 {
@@ -128,7 +127,7 @@ final class SwiftKafkaTests: XCTestCase {
             // Give time for produces message to be sent and updated on the kafka service
             sleep(1)
             var records = [KafkaConsumerRecord]()
-            for _ in 0..<10 {
+            for _ in 0..<20 {
                 let polledRecords = try consumer.poll()
                 records.append(contentsOf: polledRecords)
                 if records.count >= 10 {

@@ -14,7 +14,9 @@ else
     apt-get update
     apt-get install -y wget
     wget -qO - https://packages.confluent.io/deb/5.2/archive.key | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main"
+    sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main" -y
+    sudo apt-get update -q
+    sudo apt-get install confluent-librdkafka-plugins -y
     sudo apt-get update && sudo apt-get install confluent-community-2.12
     apt install librdkafka-dev
     wget https://www-eu.apache.org/dist/kafka/2.2.0/kafka_2.12-2.2.0.tgz -O kafka.tgz
