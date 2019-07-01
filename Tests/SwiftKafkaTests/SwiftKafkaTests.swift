@@ -47,7 +47,7 @@ final class SwiftKafkaTests: XCTestCase {
             }
             try consumer.subscribe(topics: ["test", "test1"])
             // Poll to set starting offset at end of messages
-            let _ = try consumer.poll()
+            let _ = try consumer.poll(timeout: 10)
             producer.send(producerRecord: KafkaProducerRecord(topic: "test", value: "Hello world", key: "Key"))
             producer.send(producerRecord: KafkaProducerRecord(topic: "test1", value: Data("Hello Kitura".utf8), key: Data("Key".utf8)))
             // Give time for produces message to be sent and updated on the kafka service
@@ -86,7 +86,7 @@ final class SwiftKafkaTests: XCTestCase {
             try consumer.assign(topic: "test2", partition: 0)
             // Wait for consumer to be assigned at latest message
             sleep(1)
-            let _ = try consumer.poll()
+            let _ = try consumer.poll(timeout: 10)
             producer.send(producerRecord: KafkaProducerRecord(topic: "test2", value: "Hello Assign", partition: 0, key: "123"))
             producer.send(producerRecord: KafkaProducerRecord(topic: "test2", value: "Hello Assign", partition: 1, key: "123"))
             // Give time for produces message to be sent and updated on the kafka service
@@ -120,7 +120,7 @@ final class SwiftKafkaTests: XCTestCase {
             try consumer.subscribe(topics: ["test3"])
             sleep(1)
             // Poll to set consumer to end of messages
-            let _ = try consumer.poll()
+            let _ = try consumer.poll(timeout: 10)
             for i in 0..<10 {
                 producer.send(producerRecord: KafkaProducerRecord(topic: "test3", value: "message \(i)"))
             }
