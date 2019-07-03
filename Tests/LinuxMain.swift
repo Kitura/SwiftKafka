@@ -1,7 +1,7 @@
 import XCTest
 
-import KituraKafkaTests
+import SwiftKafkaTests
 
 var tests = [XCTestCaseEntry]()
-tests += KituraKafkaTests.allTests()
+tests += SwiftKafkaTests.allTests()
 XCTMain(tests)
