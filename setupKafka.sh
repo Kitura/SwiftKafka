@@ -11,13 +11,31 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew services start kafka
     sleep 9
 else
-    apt-get update
-    apt-get install -y wget
-    wget -qO - https://packages.confluent.io/deb/5.2/archive.key | apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main"
-    sudo apt-get update && apt-get install confluent-community-2.12 librdkafka-dev
-    systemctl start confluent-zookeeper
-    systemctl start confluent-kafka
-    systemctl start confluent-schema-registry
-    sleep 5
+    if [[ ! -z "$DOCKER_IMAGE" ]]; then
+        #
+        # Taken from Confluent Quickstart (with Docker) guide:
+        # https://docs.confluent.io/current/quickstart/cos-docker-quickstart.html#cos-docker-quickstart
+        # Start Kafka components in containers. Communication will be via Docker bridge network.
+        #
+        git clone https://github.com/confluentinc/cp-docker-images
+        cd cp-docker-images
+        git checkout 5.2.2-post
+        cd examples/cp-all-in-one/
+        docker-compose up -d --build
+        docker-compose ps
+    else
+        #
+        # Taken from Confluent Install guide:
+        # https://docs.confluent.io/current/installation/installing_cp/deb-ubuntu.html#systemd-ubuntu-debian-install
+        #
+        apt-get update
+        apt-get install -y wget
+        wget -qO - https://packages.confluent.io/deb/5.2/archive.key | apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main"
+        sudo apt-get update && apt-get install confluent-community-2.12 librdkafka-dev
+        systemctl start confluent-zookeeper
+        systemctl start confluent-kafka
+        systemctl start confluent-schema-registry
+        sleep 5
+    fi
 fi
