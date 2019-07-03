@@ -28,14 +28,15 @@ else
         # Taken from Confluent Install guide:
         # https://docs.confluent.io/current/installation/installing_cp/deb-ubuntu.html#systemd-ubuntu-debian-install
         #
-        apt-get update
-        apt-get install -y wget
-        wget -qO - https://packages.confluent.io/deb/5.2/archive.key | apt-key add -
+        sudo apt-get update
+        sudo apt-get install -y wget
+        wget -qO - https://packages.confluent.io/deb/5.2/archive.key | sudo apt-key add -
         sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main"
-        sudo apt-get update && apt-get install confluent-community-2.12 librdkafka-dev
-        systemctl start confluent-zookeeper
-        systemctl start confluent-kafka
-        systemctl start confluent-schema-registry
+        sudo apt-get update
+        sudo apt-get install -y confluent-community-2.12 librdkafka-dev
+        sudo systemctl start confluent-zookeeper
+        sudo systemctl start confluent-kafka
+        sudo systemctl start confluent-schema-registry
         sleep 5
     fi
 fi
