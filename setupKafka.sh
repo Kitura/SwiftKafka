@@ -23,6 +23,8 @@ else
         cd examples/cp-all-in-one/
         docker-compose up -d --build
         docker-compose ps
+        # List active networks - confirm name of kafka bridge network (cpallinone_default)
+        docker network ls
     else
         #
         # Taken from Confluent Install guide:
