@@ -14,13 +14,10 @@ matrix:
     - os: linux
       dist: xenial
       sudo: required
-      services: docker
-      env: DOCKER_IMAGE=swift:5.0.1-xenial DOCKER_OPTIONS="--network cp-all-in-one_default"
     - os: linux
       dist: xenial
       sudo: required
-      services: docker
-      env: DOCKER_IMAGE=swift:5.0.1 SWIFT_SNAPSHOT=$SWIFT_DEVELOPMENT_SNAPSHOT DOCKER_OPTIONS="--network cp-all-in-one_default"
+      env: SWIFT_SNAPSHOT=$SWIFT_DEVELOPMENT_SNAPSHOT
     - os: osx
       osx_image: xcode10.2
       sudo: required
@@ -31,7 +28,7 @@ matrix:
 
 before_install:
   - ./setupKafka.sh
-  - git clone https://github.com/IBM-Swift/Package-Builder.git -b dockerFixes
+  - git clone https://github.com/IBM-Swift/Package-Builder.git
 
 script:
 - ./Package-Builder/build-package.sh -projectDir $TRAVIS_BUILD_DIR
