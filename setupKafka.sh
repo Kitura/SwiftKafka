@@ -23,7 +23,7 @@ else
         cd examples/cp-all-in-one/
         docker-compose up -d --build
         docker-compose ps
-        # List active networks - confirm name of kafka bridge network (cpallinone_default)
+        # List active networks - confirm name of kafka bridge network (cp-all-in-one_default)
         docker network ls
     else
         #
