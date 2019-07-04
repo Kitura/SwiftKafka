@@ -16,4 +16,7 @@ swift build
 # Set broker address for tests
 if running_in_docker; then
     export BROKER_ADDRESS="broker:9092"
+else
+    export BROKER_ADDRESS="localhost:9092"
 fi
+echo "Setting: BROKER_ADDRESS=$BROKER_ADDRESS"

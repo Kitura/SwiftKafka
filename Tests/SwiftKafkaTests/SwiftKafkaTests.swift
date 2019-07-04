@@ -40,10 +40,12 @@ final class SwiftKafkaTests: XCTestCase {
     var brokerAddress: String = "localhost:9092"
 
     override func setUp() {
+        print("Setup!")
         super.setUp()
         if let addr = ProcessInfo.processInfo.environment["BROKER_ADDRESS"] {
             self.brokerAddress = addr
         }
+        print("Broker address: \(self.brokerAddress)")
     }
 
     func testProduceConsume() {
