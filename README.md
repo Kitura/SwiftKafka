@@ -26,6 +26,11 @@ A swift implementation of [Kafka](https://kafka.apache.org/) for producing and c
 
 This works by wrapping the [librdkafka](https://github.com/edenhill/librdkafka) C library.
 
+
+## Swift version
+
+The latest version of SwiftKafka requires **Swift 5.0** or later. You can download this version of the Swift binaries by following this [link](https://swift.org/download/).
+
 ## Usage
 
 ### Swift Package Manager

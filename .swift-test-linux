@@ -1,0 +1,4 @@
+echo "Debug env"
+env
+echo "Now running tests"
+swift test

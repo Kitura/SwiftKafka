@@ -14,51 +14,22 @@ matrix:
     - os: linux
       dist: xenial
       sudo: required
-      services: docker
-      env:  DOCKER_IMAGE=swift:4.0.3 SWIFT_SNAPSHOT=4.0.3
     - os: linux
       dist: xenial
-      sudo: required
-      services: docker
-      env: DOCKER_IMAGE=swift:4.1.3 SWIFT_SNAPSHOT=4.1.3
-    - os: linux
-      dist: xenial
-      sudo: required
-      services: docker
-      env: DOCKER_IMAGE=swift:4.2.4 SWIFT_SNAPSHOT=4.2.4
-    - os: linux
-      dist: xenial
-      sudo: required
-      services: docker
-      env: DOCKER_IMAGE=swift:5.0.1-xenial
-    - os: linux
-      dist: xenial
-      sudo: required
-      services: docker
-      env: DOCKER_IMAGE=swift:5.0.1 SWIFT_SNAPSHOT=$SWIFT_DEVELOPMENT_SNAPSHOT
-    - os: osx
-      osx_image: xcode9.2
-      sudo: required
-      env: SWIFT_SNAPSHOT=4.0.3
-    - os: osx
-      osx_image: xcode9.4
-      sudo: required
-      env: SWIFT_SNAPSHOT=4.1.2 JAZZY_ELIGIBLE=true
-    - os: osx
-      osx_image: xcode10.1
-      sudo: required
-      env: SWIFT_SNAPSHOT=4.2.1
-    - os: osx
-      osx_image: xcode10.2
-      sudo: required
-    - os: osx
-      osx_image: xcode10.2
       sudo: required
       env: SWIFT_SNAPSHOT=$SWIFT_DEVELOPMENT_SNAPSHOT
+    - os: osx
+      osx_image: xcode10.2
+      sudo: required
+# Pending Travis Xcode 11 image
+#    - os: osx
+#      osx_image: xcode11
+#      sudo: required
+#      env: SWIFT_SNAPSHOT=$SWIFT_DEVELOPMENT_SNAPSHOT
 
 before_install:
+  - ./setupKafka.sh
   - git clone https://github.com/IBM-Swift/Package-Builder.git
 
 script:
-- ./setupKafka.sh
 - ./Package-Builder/build-package.sh -projectDir $TRAVIS_BUILD_DIR

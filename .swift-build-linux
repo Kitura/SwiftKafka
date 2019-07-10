@@ -1,0 +1,22 @@
+#!/bin/bash
+running_in_docker() {
+    (awk -F/ '$2 == "docker"' /proc/self/cgroup | read non_empty_input)
+}
+# Install librdkafka-dev from confluent repo
+sudo apt-get update
+sudo apt-get install -y wget software-properties-common apt-transport-https
+wget -qO - https://packages.confluent.io/deb/5.2/archive.key | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main"
+sudo apt-get update
+sudo apt-get install -y librdkafka-dev
+
+# Build project as normal
+swift build
+
+# Set broker address for tests
+if running_in_docker; then
+    export BROKER_ADDRESS="broker:9092"
+else
+    export BROKER_ADDRESS="localhost:9092"
+fi
+echo "Setting: BROKER_ADDRESS=$BROKER_ADDRESS"
