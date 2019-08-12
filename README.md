@@ -51,9 +51,25 @@ import SwiftKafka
 
 ## Getting Started
 
-To run the library you need a Kafka server to produce/consume from.
+To use SwiftKafka you will need to install the `librdkafka` package:
+
+### macOS
+```
+brew install librdkafka
+```
+
+### Linux
+Install librdkafka from the Confluent APT repositories - [see instructions here](https://docs.confluent.io/current/installation/installing_cp/deb-ubuntu.html#get-the-software) (following steps 1 and 2 to add the Confluent package signing key and apt repository), and then install librdkafka:
+```
+sudo apt install librdkafka
+```
+
+#### Running a Kafka instance locally
+To experiment locally, you can set up your own Kafka server to produce/consume from.
 
 On macOS you can follow this guide on [Kafka Installation using Homebrew](https://medium.com/@Ankitthakur/apache-kafka-installation-on-mac-using-homebrew-a367cdefd273) to run a local server.
+
+On Linux, you can follow this guide for [a manual install on Ubuntu](https://docs.confluent.io/current/installation/installing_cp/deb-ubuntu.html).
 
 ### KafkaConfig
 
