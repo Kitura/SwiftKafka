@@ -36,7 +36,7 @@ The latest version of SwiftKafka requires **Swift 5.0** or later. You can downlo
 ### Swift Package Manager
 
 #### Add dependencies
-Add the `SwiftKafka` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `SwiftKafka` [release](https://github.com/IBM-Swift/Swift-Kafka/releases).
+Add the `SwiftKafka` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `SwiftKafka` [release](https://github.com/IBM-Swift/SwiftKafka/releases).
 ```swift
 .package(url: "https://github.com/IBM-Swift/SwiftKafka.git", from: "x.x.x")
 ```
