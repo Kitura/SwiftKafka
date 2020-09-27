@@ -1,12 +1,12 @@
 <p align="center">
-<a href="http://kitura.io/">
-<img src="https://raw.githubusercontent.com/IBM-Swift/Kitura/master/Sources/Kitura/resources/kitura-bird.svg?sanitize=true" height="100" alt="Kitura">
+<a href="http://kitura.dev/">
+<img src="https://raw.githubusercontent.com/Kitura/Kitura/master/Sources/Kitura/resources/kitura-bird.svg?sanitize=true" height="100" alt="Kitura">
 </a>
 </p>
 
 
 <p align="center">
-<a href="https://ibm-swift.github.io/SwiftKafka/index.html">
+<a href="https://kitura.github.io/SwiftKafka/index.html">
 <img src="https://img.shields.io/badge/apidoc-SwiftKafka-1FBCE4.svg?style=flat" alt="APIDoc">
 </a>
 <a href="https://travis-ci.org/IBM-Swift/SwiftKafka">
@@ -36,9 +36,9 @@ The latest version of SwiftKafka requires **Swift 5.0** or later. You can downlo
 ### Swift Package Manager
 
 #### Add dependencies
-Add the `SwiftKafka` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `SwiftKafka` [release](https://github.com/IBM-Swift/SwiftKafka/releases).
+Add the `SwiftKafka` package to the dependencies within your application’s `Package.swift` file. Substitute `"x.x.x"` with the latest `SwiftKafka` [release](https://github.com/Kitura/SwiftKafka/releases).
 ```swift
-.package(url: "https://github.com/IBM-Swift/SwiftKafka.git", from: "x.x.x")
+.package(url: "https://github.com/Kitura/SwiftKafka.git", from: "x.x.x")
 ```
 Add `SwiftKafka` to your target's dependencies:
 ```swift
@@ -178,11 +178,11 @@ do {
 ```
 
 ## API Documentation
-For more information visit our [API reference](https://ibm-swift.github.io/Swift-Kafka/index.html).
+For more information visit our [API reference](https://kitura.github.dev/Swift-Kafka/index.html).
 
 ## Community
 
 We love to talk server-side Swift, and Kitura. Join our [Slack](http://swift-at-ibm-slack.mybluemix.net/) to meet the team!
 
 ## License
-This library is licensed under Apache 2.0. Full license text is available in [LICENSE](https://github.com/IBM-Swift/Swift-Kafka/blob/master/LICENSE).
+This library is licensed under Apache 2.0. Full license text is available in [LICENSE](https://github.com/Kitura/Swift-Kafka/blob/master/LICENSE).
