@@ -24,16 +24,11 @@ internal class KafkaTopic {
         self.name = name
         self.numPartitions = numPartitions
         self.replicationFactor = replicationFactor
-        var error: Data = Data(capacity: 512)
-        var errorMessage: String?
-        error.withUnsafeMutableBytes({ (bytes: UnsafeMutablePointer<Int8>) -> Void in
-            self.pointer = rd_kafka_NewTopic_new(name, numPartitions, replicationFactor, bytes, 512)
-            if self.pointer == nil {
-                errorMessage = String(cString: bytes)
-            }
-        })
-        if let errorMessage = errorMessage {
-            throw KafkaError(description: errorMessage)
+        let errstr = UnsafeMutablePointer<CChar>.allocate(capacity: KafkaConsumer.stringSize)
+        defer { errstr.deallocate() }
+        guard let pointer = rd_kafka_NewTopic_new(name, numPartitions, replicationFactor, errstr, KafkaConsumer.stringSize) else {
+            throw KafkaError(description: String(cString: errstr))
         }
+        self.pointer = pointer
     }
 }
