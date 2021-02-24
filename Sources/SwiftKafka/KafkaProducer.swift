@@ -134,17 +134,13 @@ public class KafkaProducer: KafkaClient {
 
     //// Create topic if not exists
     /// - Parameter topic: name of the topic to create
-    public func createTopic(topic: String) {
-        // Get the topic pointer for the KafkaProducerRecord topic or create a new topic if one doesn't exist
-        let topicPointer: OpaquePointer?
-        topicSemaphore.wait()
-        if let topic = topicPointers[topic] {
-            topicPointer = topic
-        } else {
-            topicPointer = rd_kafka_topic_new(kafkaHandle, topic, nil)
-            topicPointers[topic] = topicPointer
+    public func createTopics(_ topicNames: [String], numPartitions: Int32 = 1, replicationFactor: Int32 = -1) throws {
+        var topics = try topicNames.map { name -> OpaquePointer? in
+            try KafkaTopic(name: name, numPartitions: numPartitions, replicationFactor: replicationFactor).pointer
         }
-        topicSemaphore.signal()
+        let queue = rd_kafka_queue_new(kafkaHandle)
+        defer { rd_kafka_queue_destroy(queue) }
+        rd_kafka_CreateTopics(kafkaHandle, &topics, topics.count, nil, queue)
     }
     
     // This timer runs Poll at regular intervans to collect message callbacks.
