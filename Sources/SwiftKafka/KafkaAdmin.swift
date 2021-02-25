@@ -40,7 +40,9 @@ public class KafkaAdmin {
         guard errorCode.rawValue == 0 else {
             throw KafkaError.init(rawValue: Int(errorCode.rawValue))
         }
-        let _ = rd_kafka_event_CreateTopics_result(event)
+        let result = rd_kafka_event_CreateTopics_result(event)
+        var count: Int32
+        let topicResults = rd_kafka_CreateTopics_result_topics(result, &count)
 
         return topics
     }
