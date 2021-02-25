@@ -1,0 +1,3 @@
+module Ckafkahelper {
+    header "kafkahelper.h"
+}

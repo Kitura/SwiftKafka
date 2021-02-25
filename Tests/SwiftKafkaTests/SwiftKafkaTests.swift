@@ -26,6 +26,7 @@ final class SwiftKafkaTests: XCTestCase {
         ("testConfig", testConfig),
         ("testCommitSync", testCommitSync),
         ("testProduceCallback", testProduceCallback),
+        ("testCreateTopic", testCreateTopic)
     ]
     
     // Homebrew instructions for mac https://medium.com/@Ankitthakur/apache-kafka-installation-on-mac-using-homebrew-a367cdefd273
@@ -176,6 +177,21 @@ final class SwiftKafkaTests: XCTestCase {
         waitForExpectations(timeout: 10) { error in
             // blocks test until request completes
             XCTAssertNil(error)
+        }
+    }
+
+    func testCreateTopic() {
+        do {
+            let config = KafkaConfig()
+            config.brokerAddressFamily = .v4
+            let producer = try KafkaProducer(config: config)
+            guard producer.connect(brokers: self.brokerAddress) == 1 else {
+                return XCTFail("Failed to connect to brokers. Ensure Kafka server is running.")
+            }
+            
+            _ = try producer.admin.createTopics(topicNames: ["test5"])
+        } catch {
+            return XCTFail((error as? KafkaError)?.description ?? "")
         }
     }
 }
