@@ -4,9 +4,15 @@
 
 import Foundation
 import Crdkafka
+import Ckafkahelper
 
 public class KafkaAdmin {
     let kafkaHandle: OpaquePointer
+    
+    private struct ErrorMapping: Error {
+        let error: KafkaError
+        let name: String
+    }
 
     init(client: KafkaClient) {
         self.kafkaHandle = client.kafkaHandle
@@ -41,9 +47,36 @@ public class KafkaAdmin {
             throw KafkaError.init(rawValue: Int(errorCode.rawValue))
         }
         let result = rd_kafka_event_CreateTopics_result(event)
-        var count: Int32
-        let topicResults = rd_kafka_CreateTopics_result_topics(result, &count)
-
+        var count: Int = 0
+        let cTopicResults = rd_kafka_CreateTopics_result_topics(result, &count)
+        let topicResults = topicsToResult(topicResults: cTopicResults, count: count)
+        for res in topicResults {
+            switch res {
+            case .success(let name):
+                    print("Sucessffuly created topic \(name)")
+            case .failure(let errMapping):
+                print("Failed to create topic \(errMapping.name) with error \(errMapping.error)")
+            }
+        }
+        
         return topics
     }
+    
+    private func topicsToResult(topicResults: UnsafeMutablePointer<OpaquePointer?>?, count: Int) -> [Result<String, ErrorMapping>] {
+        var result: [Result<String, ErrorMapping>] = []
+        for i in 0..<count {
+            let topic = topic_result_by_idx(topicResults, count, i)
+            let name = String(cString: rd_kafka_topic_result_name(topic))
+            let errorCode = rd_kafka_topic_result_error(topic)
+            var res: Result<String, ErrorMapping>
+            if errorCode.rawValue == 0 {
+                res = .success(name)
+            } else {
+                res = .failure(ErrorMapping(error: KafkaError(rawValue: Int(errorCode.rawValue)), name: name))
+            }
+            result.append(res)
+        }
+        return result
+    }
+    
 }

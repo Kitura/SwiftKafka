@@ -25,7 +25,7 @@ let package = Package(
                             .apt(["librdkafka-dev"])
                        ]
         ),
-        .target(name: "Ckafkahelper", path: "./Sources/Ckafkahelper"),
+        .target(name: "Ckafkahelper"),
         .target(
             name: "SwiftKafka",
             dependencies: ["Crdkafka", "Ckafkahelper", "Logging"]
