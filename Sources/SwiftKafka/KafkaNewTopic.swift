@@ -7,12 +7,13 @@ import Crdkafka
 import Logging
 
 
-internal class KafkaTopic {
-    // The pointer to the undelying C `rd_kafka_conf_t` object.
+public class KafkaNewTopic {
+    // The pointer to the underlying C `rd_kafka_NewTopic_t` object.
     var pointer: OpaquePointer?
-    let name: String
-    let numPartitions: Int32
-    let replicationFactor: Int32
+    public let name: String
+    public let numPartitions: Int32
+    public let replicationFactor: Int32
+    internal var options: [String: String]
 
     deinit {
         if let pointer = pointer {
@@ -24,11 +25,21 @@ internal class KafkaTopic {
         self.name = name
         self.numPartitions = numPartitions
         self.replicationFactor = replicationFactor
-        let errstr = UnsafeMutablePointer<CChar>.allocate(capacity: KafkaConsumer.stringSize)
-        defer { errstr.deallocate() }
-        guard let pointer = rd_kafka_NewTopic_new(name, numPartitions, replicationFactor, errstr, KafkaConsumer.stringSize) else {
-            throw KafkaError(description: String(cString: errstr))
+        let errorCString = UnsafeMutablePointer<CChar>.allocate(capacity: KafkaConsumer.stringSize)
+        defer { errorCString.deallocate() }
+        guard let pointer = rd_kafka_NewTopic_new(name, numPartitions, replicationFactor, errorCString, KafkaConsumer.stringSize) else {
+            throw KafkaError(description: String(cString: errorCString))
         }
         self.pointer = pointer
+        self.options = [:]
+    }
+
+    public func setOption(key: String, value: String) throws -> [String: String] {
+        let errorCode = rd_kafka_NewTopic_set_config(pointer, key, value)
+        guard errorCode.rawValue == 0 else {
+            throw KafkaError(rawValue: Int(errorCode.rawValue))
+        }
+        options[key] = value
+        return options
     }
 }

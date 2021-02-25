@@ -131,28 +131,6 @@ public class KafkaProducer: KafkaClient {
         KafkaProducer.callbackSemaphore.signal()
         rd_kafka_poll(kafkaHandle, 0)
     }
-
-    //// Create topic if not exists
-    /// - Parameter topic: name of the topic to create
-    public func createTopics(_ topicNames: [String], numPartitions: Int32 = 1, replicationFactor: Int32 = -1) throws {
-        var topics = try topicNames.map { name -> OpaquePointer? in
-            try KafkaTopic(name: name, numPartitions: numPartitions, replicationFactor: replicationFactor).pointer
-        }
-        let queue = rd_kafka_queue_new(kafkaHandle)
-        defer { rd_kafka_queue_destroy(queue) }
-        rd_kafka_CreateTopics(kafkaHandle, &topics, topics.count, nil, queue)
-        guard let event = rd_kafka_queue_poll(queue, 5000) else {
-            throw KafkaError(description: "Haven't received replay form kafka")
-        }
-        defer { rd_kafka_event_destroy(event) }
-
-        let errorCode = rd_kafka_event_error(event)
-        guard errorCode.rawValue == 0 else {
-            throw KafkaError.init(rawValue: Int(errorCode.rawValue))
-        }
-        let _ = rd_kafka_event_CreateTopics_result(event)
-
-    }
     
     // This timer runs Poll at regular intervans to collect message callbacks.
     private func timerStart(pollInterval: TimeInterval) {
