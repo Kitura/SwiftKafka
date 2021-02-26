@@ -196,9 +196,14 @@ final class SwiftKafkaTests: XCTestCase {
                 case .success(let topicSpec):
                     XCTAssertEqual(topicSpec.name, "test5")
                 case .failure(let error):
-                    return XCTFail(error.kafkaError.description)
+                    if error.kafkaError.rawValue == 36 { // 36 Topic already exists
+                        print(error.kafkaError.description)
+                    } else {
+                        return XCTFail(error.kafkaError.description)
+                    }
                 }
             }
+            sleep(1) // Let kafka breath
 
             let destructionResults = try producer.admin.deleteTopics(topicsNames: ["test5"])
             XCTAssertEqual(destructionResults.count, 1)

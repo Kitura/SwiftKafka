@@ -147,7 +147,6 @@ public class KafkaAdmin {
         guard errorCode.rawValue == 0 else {
             throw KafkaError.init(rawValue: Int(errorCode.rawValue))
         }
-        KafkaClient.logger.debug("Parsing response for deleting \(topics)") // Ensure that topic objects are not destroyed before that
 
         let result = rd_kafka_event_DeleteTopics_result(event)
         var count: Int = 0
