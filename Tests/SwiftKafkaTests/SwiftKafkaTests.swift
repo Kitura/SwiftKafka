@@ -189,7 +189,28 @@ final class SwiftKafkaTests: XCTestCase {
                 return XCTFail("Failed to connect to brokers. Ensure Kafka server is running.")
             }
             
-            _ = try producer.admin.createTopics(topicNames: ["test5"])
+            let creationResults = try producer.admin.createTopics(topicNames: ["test5"])
+            XCTAssertEqual(creationResults.count, 1)
+            for result in creationResults {
+                switch result {
+                case .success(let topicSpec):
+                    XCTAssertEqual(topicSpec.name, "test5")
+                case .failure(let error):
+                    return XCTFail(error.kafkaError.description)
+                }
+            }
+
+            let destructionResults = try producer.admin.deleteTopics(topicsNames: ["test5"])
+            XCTAssertEqual(destructionResults.count, 1)
+            for result in destructionResults {
+                switch result {
+                case .success(let topicName):
+                    XCTAssertEqual(topicName, "test5")
+                case .failure(let error):
+                    return XCTFail(error.kafkaError.description)
+                }
+            }
+
         } catch {
             return XCTFail((error as? KafkaError)?.description ?? "")
         }
