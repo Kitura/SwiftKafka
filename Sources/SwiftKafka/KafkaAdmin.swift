@@ -102,7 +102,7 @@ public class KafkaAdmin {
 
         deinit {
             if pointer != nil {
-                rd_kafka_DeleteGroup_destroy(pointer)
+                rd_kafka_DeleteTopic_destroy(pointer)
             }
         }
     }
