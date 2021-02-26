@@ -10,13 +10,13 @@ public class KafkaAdmin {
     let kafkaHandle: OpaquePointer
     
     public struct KafkaTopicError: Error {
-        let kafkaError: KafkaError
-        let topicName: String
+        public let kafkaError: KafkaError
+        public let topicName: String
     }
 
     public struct KafkaTopicSpecificationError: Error {
-        let kafkaError: KafkaError
-        let topicSpecification: KafkaTopicSpecification
+        public let kafkaError: KafkaError
+        public let topicSpecification: KafkaTopicSpecification
     }
 
     init(client: KafkaClient) {
