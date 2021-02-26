@@ -7,13 +7,14 @@ import Crdkafka
 import Logging
 
 
-public class KafkaNewTopic {
+public class KafkaTopicSpecification {
     // The pointer to the underlying C `rd_kafka_NewTopic_t` object.
     var pointer: OpaquePointer?
     public let name: String
     public let numPartitions: Int32
     public let replicationFactor: Int32
-    internal var options: [String: String]
+    internal var _options: [String: String]
+    public var options: [String: String] { _options }
 
     deinit {
         if let pointer = pointer {
@@ -31,7 +32,7 @@ public class KafkaNewTopic {
             throw KafkaError(description: String(cString: errorCString))
         }
         self.pointer = pointer
-        self.options = [:]
+        self._options = [:]
     }
 
     public func setOption(key: String, value: String) throws -> [String: String] {
@@ -39,7 +40,7 @@ public class KafkaNewTopic {
         guard errorCode.rawValue == 0 else {
             throw KafkaError(rawValue: Int(errorCode.rawValue))
         }
-        options[key] = value
-        return options
+        _options[key] = value
+        return _options
     }
 }

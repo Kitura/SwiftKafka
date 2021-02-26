@@ -11,7 +11,7 @@ public class KafkaAdmin {
     
     private struct ErrorMapping: Error {
         let error: KafkaError
-        let name: String
+        let topicName: String
     }
 
     init(client: KafkaClient) {
@@ -20,14 +20,14 @@ public class KafkaAdmin {
 
     //// Create topic if not exists
     /// - Parameter topic: name of the topic to create
-    public func createTopics(topicNames: [String], numPartitions: Int32 = 1, replicationFactor: Int32 = -1, timeout: Int32 = 5000) throws -> [KafkaNewTopic]  {
-        let topics = try topicNames.map { name -> KafkaNewTopic in
-            try KafkaNewTopic(name: name, numPartitions: numPartitions, replicationFactor: replicationFactor)
+    public func createTopics(topicNames: [String], numPartitions: Int32 = 1, replicationFactor: Int32 = -1, timeout: Int32 = 5000) throws -> [KafkaTopicSpecification]  {
+        let topics = try topicNames.map { name -> KafkaTopicSpecification in
+            try KafkaTopicSpecification(name: name, numPartitions: numPartitions, replicationFactor: replicationFactor)
         }
         return try createTopics(topics: topics)
     }
 
-    public func createTopics(topics: [KafkaNewTopic], timeout: Int32 = 5000) throws -> [KafkaNewTopic] {
+    public func createTopics(topics: [KafkaTopicSpecification], timeout: Int32 = 5000) throws -> [KafkaTopicSpecification] {
         var topicsPointers = topics.map { topic -> OpaquePointer? in topic.pointer }
 
         let queue = rd_kafka_queue_new(kafkaHandle)
@@ -55,7 +55,7 @@ public class KafkaAdmin {
             case .success(let name):
                     print("Sucessffuly created topic \(name)")
             case .failure(let errMapping):
-                print("Failed to create topic \(errMapping.name) with error \(errMapping.error)")
+                print("Failed to create topic \(errMapping.topicName) with error \(errMapping.error)")
             }
         }
         
@@ -72,7 +72,7 @@ public class KafkaAdmin {
             if errorCode.rawValue == 0 {
                 res = .success(name)
             } else {
-                res = .failure(ErrorMapping(error: KafkaError(rawValue: Int(errorCode.rawValue)), name: name))
+                res = .failure(ErrorMapping(error: KafkaError(rawValue: Int(errorCode.rawValue)), topicName: name))
             }
             result.append(res)
         }
