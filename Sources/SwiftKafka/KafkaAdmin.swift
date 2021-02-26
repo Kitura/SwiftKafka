@@ -39,7 +39,12 @@ public class KafkaAdmin {
         return try createTopics(topicSpecifications: topics)
     }
 
-    /// Create topics
+    /// Create topics in cluster
+    ///
+    /// The list of TopicSpecification objects define the per-topic partition count, replicas, etc.
+    ///
+    /// Topic creation is non-atomic and may succeed for some topics but fail for others,
+    /// make sure to check the result for topic-specific errors.
     ///
     /// - Parameters:
     ///   - topicSpecifications: Array of topic specification which will be created
