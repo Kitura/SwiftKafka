@@ -22,7 +22,7 @@ public class KafkaTopicSpecification {
         }
     }
 
-    init(name: String, numPartitions: Int32 = 1, replicationFactor: Int32 = -1) throws {
+    public init(name: String, numPartitions: Int32 = 1, replicationFactor: Int32 = -1) throws {
         self.name = name
         self.numPartitions = numPartitions
         self.replicationFactor = replicationFactor
