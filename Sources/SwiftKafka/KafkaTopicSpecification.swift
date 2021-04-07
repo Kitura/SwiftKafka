@@ -14,7 +14,7 @@ public class KafkaTopicSpecification {
     public let numPartitions: Int32
     public let replicationFactor: Int32
     internal var _options: [String: String]
-    public var options: [String: String] { _options }
+    public var options: [String: String] { return self._options }
 
     deinit {
         if let pointer = pointer {
