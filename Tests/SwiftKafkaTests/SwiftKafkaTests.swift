@@ -59,6 +59,7 @@ final class SwiftKafkaTests: XCTestCase {
                 else {
                     return XCTFail("Failed to connect to brokers. Ensure Kafka server is running.")
             }
+            let _ = try consumer.admin.createTopics(topicNames: ["test", "test1"], replicationFactor: 1)
             try consumer.subscribe(topics: ["test", "test1"])
             // Poll to set starting offset at end of messages
             let _ = try consumer.poll(timeout: 10)
@@ -131,6 +132,7 @@ final class SwiftKafkaTests: XCTestCase {
             XCTAssertEqual(brokersCount, 1)
             let producerBrokersCount = producer.connect(brokers: self.brokerAddress)
             XCTAssertEqual(producerBrokersCount, 1)
+            let _ = try consumer.admin.createTopics(topicNames: ["test3"], replicationFactor: 1)
             try consumer.subscribe(topics: ["test3"])
             sleep(1)
             // Poll to set consumer to end of messages
