@@ -34,6 +34,10 @@ public class KafkaClient {
     enum ClientType {
         case consumer, producer
     }
+
+    public lazy var admin: KafkaAdmin = {
+        KafkaAdmin(client: self)
+    }()
     
     // Initialise a KafkaClient of the provided type
     init(clientType: ClientType, config: KafkaConfig) throws {
