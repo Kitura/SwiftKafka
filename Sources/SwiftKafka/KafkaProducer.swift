@@ -112,14 +112,18 @@ public class KafkaProducer: KafkaClient {
         }
         // Allocate a byte of memory to act as an identifer for the message callback
         let idPointer = UnsafeMutableRawPointer.allocate(byteCount: 1, alignment: 0)
+        // Allocate bytes with record value
+        let valuePointer = UnsafeMutablePointer<UInt8>.allocate(capacity: producerRecord.value.count)
+        producerRecord.value.copyBytes(to: valuePointer, count: producerRecord.value.count)
         let responseCode = rd_kafka_produce(topicPointer,
-                                            producerRecord.partition,
-                                            RD_KAFKA_MSG_F_COPY,
-                                            UnsafeMutablePointer<UInt8>(mutating: [UInt8](producerRecord.value)),
-                                            producerRecord.value.count,
-                                            keyBytes,
-                                            keyBytesCount,
-                                            idPointer)
+                                    producerRecord.partition,
+                                    RD_KAFKA_MSG_F_COPY,
+                                    valuePointer,
+                                    producerRecord.value.count,
+                                    keyBytes,
+                                    keyBytesCount,
+                                    idPointer)
+
         if responseCode != 0 {
             if let callback = messageCallback {
                 callback(.failure(KafkaError(rawValue: Int(responseCode))))
@@ -132,7 +136,7 @@ public class KafkaProducer: KafkaClient {
         rd_kafka_poll(kafkaHandle, 0)
     }
     
-    // This timer runs Poll at regular intervans to collect message callbacks.
+    // This timer runs Poll at regular intervals to collect message callbacks.
     private func timerStart(pollInterval: TimeInterval) {
         callbackTimer.schedule(deadline: .now(), repeating: pollInterval, leeway: DispatchTimeInterval.milliseconds(Int(pollInterval * 100)))
         callbackTimer.setEventHandler(handler: { [weak self] in
