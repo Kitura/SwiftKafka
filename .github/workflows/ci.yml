@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Wait for Kafka
         run: |
@@ -74,16 +74,11 @@ jobs:
             bash -lc '
               set -euo pipefail
 
-              sed -i \
-                -e "s|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g" \
-                -e "s|http://security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g" \
-                /etc/apt/sources.list
-
-              apt-get -o Acquire::Check-Valid-Until=false update
+              apt-get update
               apt-get install -y --no-install-recommends ca-certificates curl gnupg software-properties-common
               curl -fsSL https://packages.confluent.io/deb/5.2/archive.key | apt-key add -
               add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main"
-              apt-get -o Acquire::Check-Valid-Until=false update
+              apt-get update
               apt-get install -y --no-install-recommends librdkafka-dev
 
               swift --version
