@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - "issue*"
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    name: Swift 5.0.1 / Ubuntu 16.04 / Kafka 5.2.2
+    runs-on: ubuntu-24.04
+
+    services:
+      zookeeper:
+        image: confluentinc/cp-zookeeper:5.2.2
+        env:
+          ZOOKEEPER_CLIENT_PORT: 2181
+          ZOOKEEPER_TICK_TIME: 2000
+        ports:
+          - 2181:2181
+
+      kafka:
+        image: confluentinc/cp-kafka:5.2.2
+        env:
+          KAFKA_BROKER_ID: 1
+          KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+          KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+          KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+          KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+          KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+        ports:
+          - 9092:9092
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Wait for Kafka
+        run: |
+          set -euo pipefail
+
+          for _ in {1..60}; do
+            if docker exec "${{ job.services.kafka.id }}" kafka-topics --zookeeper zookeeper:2181 --list >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 2
+          done
+
+          docker logs "${{ job.services.zookeeper.id }}"
+          docker logs "${{ job.services.kafka.id }}"
+          exit 1
+
+      - name: Build and test
+        run: |
+          set -euo pipefail
+
+          docker run --rm --network host \
+            -e BROKER_ADDRESS=localhost:9092 \
+            -v "${PWD}:/workspace" \
+            -w /workspace \
+            swift:5.0.1-xenial \
+            bash -lc '
+              set -euo pipefail
+
+              apt-get update
+              apt-get install -y --no-install-recommends ca-certificates curl gnupg software-properties-common
+              curl -fsSL https://packages.confluent.io/deb/5.2/archive.key | apt-key add -
+              add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.2 stable main"
+              apt-get update
+              apt-get install -y --no-install-recommends librdkafka-dev
+
+              swift --version
+              swift build
+              swift test
+            '
